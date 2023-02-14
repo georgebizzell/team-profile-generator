@@ -13,24 +13,6 @@ const render = require("./src/page-template.js");
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 
-// function to initialize program
-function init() {
-    inquirer.prompt(managerQuestions).then((answers) => {
-        
-        console.log(answers);
-      })
-      .catch((error) => {
-        if (error.isTtyError) {
-          console.log("Prompt couldn't be rendered in the current environment");
-        } else {
-          console.log("Something else went wrong");
-        }
-      });
-}
-
-// function call to initialize program
-init();
-
 // Initial question to find out team manager
 const managerQuestions = [
     {
@@ -76,3 +58,21 @@ const employeeQuestions = [
     }
 ];
 
+
+// function to initialize program
+function init() {
+    inquirer.prompt(managerQuestions).then((answers) => {
+        
+        console.log(answers);
+      })
+      .catch((error) => {
+        if (error.isTtyError) {
+          console.log("Prompt couldn't be rendered in the current environment");
+        } else {
+          console.log("Something else went wrong");
+        }
+      });
+}
+
+// function call to initialize program
+init();
