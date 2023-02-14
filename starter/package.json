@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/georgebizzell/team-profile-generator/issues"
   },
-  "homepage": "https://github.com/georgebizzell/team-profile-generator#readme"
+  "homepage": "https://github.com/georgebizzell/team-profile-generator#readme",
+  "dependencies": {
+    "inquirer": "^9.1.4"
+  }
 }
