@@ -149,6 +149,8 @@ function init() {
 
         console.log(team.manager);
 
+        employeeTypeSelection();
+
         }
 
       )
