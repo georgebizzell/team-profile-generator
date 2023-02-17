@@ -17,22 +17,22 @@ const render = require("./src/page-template.js");
 const managerQuestions = [
     {
         type: "input",
-        name: "teamManagerName",
+        name: "name",
         message: "Enter the team manager's name"
     },
     {
         type: "input",
-        name:"teamManagerId",
+        name:"id",
         message: "Enter the team manager's ID"
     },
     {
         type: "input",
-        name:"teamManagerEmail",
+        name:"email",
         message: "Enter the team manager's email address"
     },
     {
         type: "input",
-        name:"teamManagerOfficeNumber",
+        name:"officeNumber",
         message: "Enter the team manager's office number"
     }
 ];
@@ -86,26 +86,24 @@ function nameAndId(employeeType) {
 
             let engineerDetails = {...nameID, ...github};
 
-            console.log(github);
-            
-            console.log(nameID);
-
-            console.log(engineerDetails);
-
-            const newEngineer = new Engineer (engineerDetails)
+            let newEngineer = new Engineer (engineerDetails)
             
             team.Engineer = newEngineer;
+
+            console.log(team);
         })
         }
         else if (employeeType.menuChoice == "Intern")
         {
             inquirer.prompt(internQuestions).then((school) => {
 
-            nameID.push(school) = internDetails;
+            let internDetails = {...nameID, ...school};
 
-            const newIntern = new Intern (internDetails)
+            let newIntern = new Intern (internDetails)
             
             team.Intern = newIntern;
+
+            console.log(team);
         })
     }})
 
@@ -145,15 +143,11 @@ const team = {};
 function init() {
     inquirer.prompt(managerQuestions).then((answers) => {
         
-        const newManager = new Manager(answers)
+        const newManager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber)
 
         team.manager = newManager;
 
-        console.log(answers);
-        
-        console.log(newManager);
-
-        console.log(team.manager);
+        console.log(team);
 
         employeeTypeSelection();
 
