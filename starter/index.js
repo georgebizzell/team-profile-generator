@@ -84,7 +84,13 @@ function nameAndId(employeeType) {
         {
             inquirer.prompt(engineerQuestions).then((github) => {
 
-            nameID.push(github) = engineerDetails;
+            let engineerDetails = {...nameID, ...github};
+
+            console.log(github);
+            
+            console.log(nameID);
+
+            console.log(engineerDetails);
 
             const newEngineer = new Engineer (engineerDetails)
             
