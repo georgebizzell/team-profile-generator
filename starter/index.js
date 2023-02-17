@@ -87,31 +87,29 @@ function nameAndId(employeeType) {
         
         if(employeeType.menuChoice == "Engineer")
         {
-            inquirer.prompt(engineerQuestions).then((github) => {
+            inquirer.prompt(engineerQuestions).then((githubName) => {
 
-            let engineerDetails = {...nameID, ...github};
-
-
-            let newEngineer = new Engineer (engineerDetails.name, engineerDetails.id, engineerDetails.email, engineerDetails.github)
+            let newEngineer = new Engineer (nameID.name, nameID.id, nameID.email, githubName.github)
             
             team.Engineer = newEngineer;
 
-            console.log(team);
+            employeeTypeSelection();
+
         })
         }
         else if (employeeType.menuChoice == "Intern")
         {
-            inquirer.prompt(internQuestions).then((school) => {
+            inquirer.prompt(internQuestions).then((schoolName) => {
 
-            let internDetails = {...nameID, ...school};
-
-            let newIntern = new Intern (internDetails.name, internDetails.id, internDetails.email, internDetails.school)
+            let newIntern = new Intern (nameID.name, nameID.id, nameID.email, schoolName.school)
             
             team.Intern = newIntern;
 
-            console.log(team);
+            employeeTypeSelection();
         })
-    }})
+    }
+        
+    })
 
         .catch((error) => {
             if (error.isTtyError) {
