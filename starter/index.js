@@ -52,19 +52,24 @@ const employeeQuestions = [
     {
         type: "input",
         name:"name",
-        message: "What is the person's name?"
+        message: "Enter the person's name?"
+    },
+    {
+        type: "input",
+        name:"email",
+        message: "Enter the person's email address"
     },
     {
         type: "input",
         name:"id",
-        message: "What is their Employment ID?"
+        message: "Enter their Employment ID?"
     }
 ];
 
 const engineerQuestions = [
     {
         type: "input",
-        name:"gitHub",
+        name:"github",
         message: "Enter the Engineer's gitHub"
     }
 ];
@@ -86,7 +91,8 @@ function nameAndId(employeeType) {
 
             let engineerDetails = {...nameID, ...github};
 
-            let newEngineer = new Engineer (engineerDetails)
+
+            let newEngineer = new Engineer (engineerDetails.name, engineerDetails.id, engineerDetails.email, engineerDetails.github)
             
             team.Engineer = newEngineer;
 
@@ -99,7 +105,7 @@ function nameAndId(employeeType) {
 
             let internDetails = {...nameID, ...school};
 
-            let newIntern = new Intern (internDetails)
+            let newIntern = new Intern (internDetails.name, internDetails.id, internDetails.email, internDetails.school)
             
             team.Intern = newIntern;
 
