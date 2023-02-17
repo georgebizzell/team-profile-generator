@@ -39,13 +39,16 @@ const managerQuestions = [
 
 
 // Questions to ask team manager
-const employeeQuestions = [
+const employeeTypeMenu = [
     {
         type: "list",
         message: "Please select an employee type from the list or finish building the team",
-        name: "license",
+        name: "menuChoice",
         choices: ["Engineer", "Intern", "Finish"]
-    },
+    }
+]
+
+const employeeQuestions = [
     {
         type: "input",
         name:"name",
@@ -58,13 +61,97 @@ const employeeQuestions = [
     }
 ];
 
+const engineerQuestions = [
+    {
+        type: "input",
+        name:"gitHub",
+        message: "Enter the Engineer's gitHub"
+    }
+];
+
+const internQuestions = [
+    {
+        type: "input",
+        name:"school",
+        message: "Enter the Intern's school"
+    }
+];
+
+function nameAndId(employeeType) {
+    inquirer.prompt(employeeQuestions).then((nameID) => {
+        
+        if(employeeType.menuChoice == "Engineer")
+        {
+            inquirer.prompt(engineerQuestions).then((github) => {
+
+            nameID.push(github) = engineerDetails;
+
+            const newEngineer = new Engineer (engineerDetails)
+            
+            team.Engineer = newEngineer;
+        })
+        }
+        else if (employeeType.menuChoice == "Intern")
+        {
+            inquirer.prompt(internQuestions).then((school) => {
+
+            nameID.push(school) = internDetails;
+
+            const newIntern = new Intern (internDetails)
+            
+            team.Intern = newIntern;
+        })
+    }})
+
+        .catch((error) => {
+            if (error.isTtyError) {
+              console.log("Prompt couldn't be rendered in the current environment");
+            } else {
+              console.log("Something else went wrong");
+            }
+          });
+}
+
+function employeeTypeSelection() {
+    inquirer.prompt(employeeTypeMenu).then((typeOrFinish) => {
+        
+        if (typeOrFinish.menuChoice === 'Finish')
+            {
+                generateTeam(team);
+            }
+        else
+        {
+            nameAndId(typeOrFinish)
+        }
+    })
+        .catch((error) => {
+            if (error.isTtyError) {
+              console.log("Prompt couldn't be rendered in the current environment");
+            } else {
+              console.log("Something else went wrong");
+            }
+          });
+}
+
+const team = {};
 
 // function to initialize program
 function init() {
     inquirer.prompt(managerQuestions).then((answers) => {
         
+        const newManager = new Manager(answers)
+
+        team.manager = newManager;
+
         console.log(answers);
-      })
+        
+        console.log(newManager);
+
+        console.log(team.manager);
+
+        }
+
+      )
       .catch((error) => {
         if (error.isTtyError) {
           console.log("Prompt couldn't be rendered in the current environment");
