@@ -1,3 +1,5 @@
+// Importing classes and methods
+
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
@@ -5,15 +7,16 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
+// Setting up output directory
+
 const OUTPUT_DIR = path.resolve("output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
+// Importing page template methods
 const team = require("./src/page-template.js");
 
 
-// TODO: Write Code to gather information about the development team members, and render the HTML file.
-
-// Initial question to find out team manager
+// Initial questions about the team manager
 const managerQuestions = [
     {
         type: "input",
@@ -38,7 +41,8 @@ const managerQuestions = [
 ];
 
 
-// Questions to ask team manager
+// Repeated menu option separated here
+
 const employeeTypeMenu = [
     {
         type: "list",
@@ -47,6 +51,8 @@ const employeeTypeMenu = [
         choices: ["Engineer", "Intern", "Finish"]
     }
 ]
+
+// Standard employee questions for both Engineer and Intern
 
 const employeeQuestions = [
     {
@@ -66,6 +72,8 @@ const employeeQuestions = [
     }
 ];
 
+// Engineer only GitHub question
+
 const engineerQuestions = [
     {
         type: "input",
@@ -74,6 +82,8 @@ const engineerQuestions = [
     }
 ];
 
+// Intern only GitHub question
+
 const internQuestions = [
     {
         type: "input",
@@ -81,6 +91,8 @@ const internQuestions = [
         message: "Enter the Intern's school"
     }
 ];
+
+// Engineer and Intern question asking function with inquirer
 
 function nameAndId(employeeType) {
     inquirer.prompt(employeeQuestions).then((nameID) => {
@@ -122,6 +134,8 @@ function nameAndId(employeeType) {
           });
 }
 
+// Repeated menu option prompt
+
 function employeeTypeSelection() {
     inquirer.prompt(employeeTypeMenu).then((typeOrFinish) => {
         
@@ -148,7 +162,7 @@ function employeeTypeSelection() {
 
 const teamMembers = [];
 
-// function to initialize program
+// Function to initialize program and create the team manager
 function init() {
     inquirer.prompt(managerQuestions).then((answers) => {
         
