@@ -5,10 +5,10 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
-const OUTPUT_DIR = path.resolve(__dirname, "output");
+const OUTPUT_DIR = path.resolve("output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
-const render = require("./src/page-template.js");
+const team = require("./src/page-template.js");
 
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
@@ -91,7 +91,7 @@ function nameAndId(employeeType) {
 
             let newEngineer = new Engineer (nameID.name, nameID.id, nameID.email, githubName.github)
             
-            team.Engineer = newEngineer;
+            teamMembers.push(newEngineer);
 
             employeeTypeSelection();
 
@@ -103,7 +103,7 @@ function nameAndId(employeeType) {
 
             let newIntern = new Intern (nameID.name, nameID.id, nameID.email, schoolName.school)
             
-            team.Intern = newIntern;
+            teamMembers.push(newIntern);
 
             employeeTypeSelection();
         })
@@ -125,7 +125,10 @@ function employeeTypeSelection() {
         
         if (typeOrFinish.menuChoice === 'Finish')
             {
-                generateTeam(team);
+                let teamProfileHTML = team(teamMembers)
+                console.log(teamProfileHTML);
+                writeToHTML(teamProfileHTML);
+                
             }
         else
         {
@@ -141,7 +144,7 @@ function employeeTypeSelection() {
           });
 }
 
-const team = {};
+const teamMembers = [];
 
 // function to initialize program
 function init() {
@@ -149,9 +152,7 @@ function init() {
         
         const newManager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber)
 
-        team.manager = newManager;
-
-        console.log(team);
+        teamMembers.push(newManager);
 
         employeeTypeSelection();
 
@@ -166,6 +167,21 @@ function init() {
         }
       });
 }
+
+// Write resulting HTML content to the output file
+
+function writeToHTML(teamProfileHTML) {
+fs.writeFile(outputPath, teamProfileHTML, function(errorCheck)
+{
+    // console.log("output path: ", outputPath);
+
+    if(errorCheck) {
+        console.log("Error");
+    }
+    else {
+        console.log("Team Profile created");
+    }
+})}
 
 // function call to initialize program
 init();
