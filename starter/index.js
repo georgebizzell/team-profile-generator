@@ -101,6 +101,8 @@ function nameAndId(employeeType) {
         {
             inquirer.prompt(internQuestions).then((schoolName) => {
 
+            console.log(schoolName.school);
+
             let newIntern = new Intern (nameID.name, nameID.id, nameID.email, schoolName.school)
             
             teamMembers.push(newIntern);

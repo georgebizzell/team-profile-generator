@@ -12,7 +12,7 @@ class Intern extends Employee {
 
     getSchool()
     {
-        return this.School;
+        return this.school;
     }
 
     getRole() 
